@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.java.java14.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '14'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs += "--enable-preview"
+}
+
+tasks.withType(Test) {
+	jvmArgs += "--enable-preview"
+	jvmArgs("-XX:+ShowCodeDetailsInExceptionMessages")
+	testLogging {
+		setExceptionFormat("full") // Prints exception messages
+	}
+}
+
+tasks.withType(JavaExec) {
+	jvmArgs += '--enable-preview'
+}
